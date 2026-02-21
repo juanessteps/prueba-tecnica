@@ -1,4 +1,4 @@
-const { crearUsuario } = require('../models/userModel');
+const { crearUsuario, obtenerUsuarios } = require('../models/userModel');
 
 const postUsuario = async (req, res) => {
     const { nombre, email } = req.body;
@@ -18,4 +18,13 @@ const postUsuario = async (req, res) => {
     }
 };
 
-module.exports = { postUsuario };
+const getUsuarios = async (req, res) => {
+    try {
+        const usuarios = await obtenerUsuarios();
+        return res.status(200).json(usuarios);
+    } catch (error) {
+        return res.status(500).json({ error: 'Error interno del servidor' });
+    }
+};
+
+module.exports = { postUsuario, getUsuarios };
