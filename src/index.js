@@ -3,6 +3,7 @@ const cors = require('cors');
 require('dotenv').config();
 
 const { crearTablaUsuarios } = require('./models/userModel');
+const userRoutes = require('./routes/userRoutes');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -13,6 +14,8 @@ app.use(express.json());
 app.get('/', (req, res) => {
   res.json({ mensaje: 'Bienvenido a la API de la Prueba Técnica Junior' });
 });
+
+app.use('/api', userRoutes);
 
 const iniciar = async () => {
   try {
